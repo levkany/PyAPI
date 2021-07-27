@@ -19,4 +19,4 @@ PyAPI
 
 ## ⚠️ License
 
-`PyAPI` is free and open-source software licensed under the [GNU 2.0 License](https://github.com/levkany/PyAPI/blob/master/LICENSE)
+`PyAPI` is free and open-source software licensed under the [GNU 3.0 License](https://github.com/levkany/PyAPI/blob/master/LICENSE)

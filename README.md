@@ -1,5 +1,4 @@
 <h1 align="center">
-  <img src="pyapi" width="224px"/><br/>
   PyAPI
 </h1>
 <p align="center">placeholder</p>

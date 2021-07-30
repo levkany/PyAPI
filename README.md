@@ -1,7 +1,7 @@
 <h1 align="center">
   PyAPI
 </h1>
-<p align="center">placeholder</p>
+<p align="center">Restfull API framework built by and for python</p>
 
 <p align="center">
   <a href="https://github.com/create-go-app/cli/releases" target="_blank">

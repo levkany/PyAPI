@@ -16,7 +16,7 @@
   from simple to use endpoint overrides , to total control over what is being recieved and responded. <br/><br/>
   If you need a quick yet powerfull way to create a restfull api, search no more!
 </p>
-
+<br/>
 
 ## ⚡️ Quick start
 
@@ -56,6 +56,7 @@ server = RestServer('192.168.1.10', endpoints=endpoints, env='local')
 server.start()
 ```
 
+<br/>
 
 ## ⚠️ License
 

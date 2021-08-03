@@ -10,7 +10,7 @@
 </p>
 
 ## 📄 Intro
-<h4><b>PyAPI</b>is a framework for building restfull api servers the fast, easy and right way!</h4>
+<h4>PyAPI is a framework for building restfull api servers the fast, easy and right way!</h4>
 
 ## ⚡️ Quick start
 

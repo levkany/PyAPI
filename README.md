@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://github.com/create-go-app/cli/releases" target="_blank">
-    <img src="https://img.shields.io/badge/version-v0.0.1-blue?style=for-the-badge&logo=none" alt="cli version" />
+    <img src="https://img.shields.io/badge/version-v1.0.0-blue?style=for-the-badge&logo=none" alt="cli version" />
   </a>
 </p>
 

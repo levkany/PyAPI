@@ -1,4 +1,4 @@
-from class_http_responder import HttpResponder
+from PyAPI.class_http_responder import HttpResponder
 
 def GET(data):
         # Do something and return

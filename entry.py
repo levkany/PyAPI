@@ -1,6 +1,6 @@
-from class_server import RestServer
-from class_endpoints import RestEndPoints
-from class_http_responder import HttpResponder
+from PyAPI.class_server import RestServer
+from PyAPI.class_endpoints import RestEndPoints
+from PyAPI.class_http_responder import HttpResponder
 
 # import endpoint callbacks
 from endpoints.clients import clients, clients_add

@@ -19,8 +19,40 @@
 
 ## ⚡️ Quick start
 
+Import framework dependencies
 ```python
-PyAPI
+# import framework dependencies
+from class_server import RestServer
+from class_endpoints import RestEndPoints
+from class_http_responder import HttpResponder
+```
+
+
+Import example endpoints
+```python
+# import endpoint callbacks
+from endpoints.clients import clients, clients_add
+```
+
+Initialize endpoints handler
+```python
+# initialize endpoints handler
+endpoints = RestEndPoints()
+```
+
+
+Register the imported endpoints
+```python
+# add some endpoints
+endpoints.add('/clients', clients.GET, clients.POST)
+endpoints.add('/clients/add', clients_add.GET, clients_add.POST)
+```
+
+Start the restfull API server
+```python
+# start the server
+server = RestServer('192.168.1.10', endpoints=endpoints, env='local')
+server.start()
 ```
 
 

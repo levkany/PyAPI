@@ -11,7 +11,7 @@
 
 ## 📄 Intro
 <p>
-  PyAPI is a framework for building restfull api servers the fast, easy and right way!
+  PyAPI is a framework for building restfull api servers the fast, easy and right way! <br/>
   PyAPI aims to be the fastest restfull api framework on the internet yet also providing the developer enought flexability and power to control everything, <br/>
   from simple to use endpoint overrides , to total control over what is being recieved and responded. <br/><br/>
   If you need a quick yet powerfull way to create a restfull api, search no more!

@@ -1,0 +1,10 @@
+# This file contains the passed PyAPI tests within a reasonable range
+
+==========================================
+request method tests
+=========================================
+1.  DELETE Request          - passed
+2.  PUT Request             - passed
+3.  GET Request             - passed
+4.  POST Request            - passed
+5.  {Unknown} request       - ??

@@ -1,0 +1,11 @@
+PyAPi - v1.0.0
+    - updated HTTP responder status to take the proper "text" related to the status code
+    - added http responder headers override capability
+    - basic http responder implemented
+    - basic 404 responder with override capability                      
+    - added basic request matcher to the registered endpoints
+    - fixed http parser not removing trailing backslash                 
+    - basic http parser implemented
+    - ability to register endpoints
+    - Every client request is forwarded to a unique thread
+    - Basic TCP listener implemented

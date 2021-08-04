@@ -23,9 +23,9 @@
 Import framework dependencies
 ```python
 # import framework dependencies
-from class_server import RestServer
-from class_endpoints import RestEndPoints
-from class_http_responder import HttpResponder
+from PyAPI.class_server import RestServer
+from PyAPI.class_endpoints import RestEndPoints
+from PyAPI.class_http_responder import HttpResponder
 ```
 
 
@@ -52,7 +52,7 @@ endpoints.add('/clients/add', clients_add.GET, clients_add.POST)
 Start the restfull API server
 ```python
 # start the server
-server = RestServer('192.168.1.10', endpoints=endpoints, env='local')
+server = RestServer('127.0.0.1', endpoints=endpoints, env='local')
 server.start()
 ```
 

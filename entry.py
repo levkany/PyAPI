@@ -17,5 +17,5 @@ endpoints.add('/clients', clients.GET, clients.POST)
 endpoints.add('/clients/add', clients_add.GET, clients_add.POST)
 
 # start the server
-server = RestServer('192.168.1.15', endpoints=endpoints, env='local')
+server = RestServer('127.0.0.1', endpoints=endpoints, env='local')
 server.start()

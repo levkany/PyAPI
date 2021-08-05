@@ -17,8 +17,8 @@ class RestEndPoints():
     #
     #   Add a new endpoint to the collection of the endpoints
     #
-    def add(self, endpoint:str='', *executers:callable):
-        self.endpoints.append((endpoint, executers))
+    def add(self, endpoint:str='', executer=False):
+        self.endpoints.append((endpoint, executer))
 
 
     

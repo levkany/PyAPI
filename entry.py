@@ -13,8 +13,8 @@ def __not_found_callback():
 endpoints = RestEndPoints(not_found_callback=__not_found_callback)
 
 # add some endpoints
-endpoints.add('/clients', clients.GET, clients.POST)
-endpoints.add('/clients/add', clients_add.GET, clients_add.POST)
+endpoints.add('/clients', clients.callback)
+endpoints.add('/clients/add', clients_add.callback)
 
 # start the server
 server = RestServer('127.0.0.1', endpoints=endpoints, env='local')

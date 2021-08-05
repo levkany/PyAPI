@@ -56,6 +56,12 @@ server = RestServer('127.0.0.1', endpoints=endpoints, env='local')
 server.start()
 ```
 
+
+## ❕ Notes
+- If you notice and bug or error, or if you have a suggestion, please dont hesitate and let me know <br/>
+  so that i could fix it and make the framework even better!
+
+
 Open the browser and navigate to the clients endpoint to see the example
 ![image](https://user-images.githubusercontent.com/58599501/128392485-1fb1df8d-6587-4dda-8dde-cc84ce981813.png)
 

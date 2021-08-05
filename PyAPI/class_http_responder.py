@@ -33,8 +33,6 @@ class HttpResponder():
         parsed_data['content-type'] = 'text/html; charset=UTF-8'
         parsed_data['data'] = str(data)
 
-        print(parsed_data)
-
         # add / override headers based on passed ones
         if(False != overrides):
             for key in overrides:
@@ -45,9 +43,9 @@ class HttpResponder():
         for key in parsed_data:
             if('HTTP' == key):
                 opt += 'HTTP/' + str(parsed_data[key]) + ' ' + HttpCodes.get(status_code)['msg'] + '\r\n'
-            elif('data' == key):
-                opt += '\r\n' + str(parsed_data[key])
-            else:
+            elif('data' != key):
                 opt += str(key) + ': ' + str(parsed_data[key]) + '\r\n'
 
+        # append the response data at the end to avoid missing header overrides
+        opt += '\r\n' + parsed_data['data'] + '\r\n'
         return opt

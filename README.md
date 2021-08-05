@@ -42,11 +42,23 @@ endpoints = RestEndPoints()
 ```
 
 
+
+(Optional) - register 404 endpoint
+```python
+# override 404 not found callback
+def __not_found_callback():
+    return HttpResponder.build(404, '<h1>This API endpoint is not found!</h1>', {'Content-type': 'text/html'})
+
+# initialize endpoints handler
+endpoints = RestEndPoints(not_found_callback=__not_found_callback)
+```
+
+
 Register the imported endpoints
 ```python
 # add some endpoints
-endpoints.add('/clients', clients.GET, clients.POST)
-endpoints.add('/clients/add', clients_add.GET, clients_add.POST)
+endpoints.add('/clients', clients.callback)
+endpoints.add('/clients/add', clients_add.callback)
 ```
 
 Start the restfull API server

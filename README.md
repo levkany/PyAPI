@@ -55,11 +55,13 @@ Start the restfull API server
 server = RestServer('127.0.0.1', endpoints=endpoints, env='local')
 server.start()
 ```
+<br/>
 
 
 ## ❕ Notes
 - If you notice and bug or error, or if you have a suggestion, please dont hesitate and let me know <br/>
   so that i could fix it and make the framework even better!
+<br/>
 
 
 Open the browser and navigate to the clients endpoint to see the example

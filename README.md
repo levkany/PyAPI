@@ -74,8 +74,10 @@ Or start the server with the example "entry.py" file via the terminal:
 ```
 
 
-Open the browser and type the following in the address bar:
-<code>127.0.0.1:8820</code>
+Open the browser and type the following in the address bar to see the example endpoints in action:
+```python
+> 127.0.0.1:8820
+```
 <br/>
 <br/>
 

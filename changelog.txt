@@ -1,3 +1,9 @@
+PyAPi - v1.0.1
+    - updated endpoint examples & their documentation
+    - simplified the way endpoint callbacks are registered
+    - fixed bug where default endpoint wouldn't work - (path: "/"):
+    - fixed bug where headers override wouldn't work
+
 PyAPi - v1.0.0
     - updated HTTP responder status to take the proper "text" related to the status code
     - added http responder headers override capability

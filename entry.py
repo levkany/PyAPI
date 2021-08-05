@@ -12,7 +12,13 @@ def __not_found_callback():
 # initialize endpoints handler
 endpoints = RestEndPoints(not_found_callback=__not_found_callback)
 
+def default_endpoint(data):
+    welcome_data = open('welcome.html', 'r').readlines()
+    data_to_send = ''.join(welcome_data)
+    return HttpResponder.build(200, data_to_send, {'Content-type': 'text/html'})
+
 # add some endpoints
+endpoints.add('/', default_endpoint)
 endpoints.add('/clients', clients.callback)
 endpoints.add('/clients/add', clients_add.callback)
 

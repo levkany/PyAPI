@@ -103,6 +103,16 @@ class RestServer():
         parsed = HttpParser.parse(data)
         method=parsed['method']
         path=parsed['uri']
+        body = ''
+        try:
+            body = parsed['query_string']
+        except:
+            try:
+                body = parsed['body']
+            except: body = ''
+
+        # empty path is the default path
+        if('' == path): path = '/'
 
         # find a match between the request method and the registered endpoint
         # also match the request method to the registered endpoint supported method
@@ -111,18 +121,12 @@ class RestServer():
         for endpoint in self.attached_endpoints.get_all_endpoints():
             endpoint_path = endpoint[0]
             if(endpoint_path == path):
-                # find the proper method to invoke from the endpoint
-                for method_callback in endpoint[1]:
-                    
-                    # matched callback!
-                    if(method_callback.__name__ == method):
-                        is_callback_found = True
-                        data_to_send = bytearray(method_callback(data), 'utf-8')
-                        try:
-                            client.send(data_to_send)
-                        except: is_callback_found = False
-                        
-                break
+                is_callback_found = True
+                method_callback = endpoint[1]
+                data_to_send = bytearray(method_callback({'client': address[0], 'method': method, 'path': path, 'body': body}), 'utf-8')
+                try:
+                    client.send(data_to_send)
+                except: is_callback_found = False
 
         if(False == is_callback_found):
             # data can be empty / False - if no 404 callback is registered

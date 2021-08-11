@@ -4,9 +4,13 @@
 <p align="center">Restfull API framework built by and for python</p>
 
 <p align="center">
-  <a href="https://github.com/create-go-app/cli/releases" target="_blank">
-    <img src="https://img.shields.io/badge/version-v1.0.0-blue?style=for-the-badge&logo=none" alt="cli version" />
-  </a>
+  <img src="https://img.shields.io/badge/version-v1.0.0-blue?style=for-the-badge&logo=none" alt="cli version" />
+</p>
+
+<p align="center">
+  Tested Supported OS 
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="" />
+  <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="" />
 </p>
 
 ## 📄 Intro

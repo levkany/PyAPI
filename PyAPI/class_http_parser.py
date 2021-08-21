@@ -41,8 +41,8 @@ class HttpParser():
                 if(parsed_data['uri'].endswith('/')):
                     parsed_data['uri'] = parsed_data['uri'][:-1]
 
-            # body data
-            if(index == (lines.__len__() -1) and '' != line):
-                parsed_data['body'] = line
-            index+=1
+                # body data
+                if(index == (lines.__len__() -1) and '' != line):
+                    parsed_data['body'] = line
+                index+=1    
         return parsed_data

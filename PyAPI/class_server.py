@@ -7,6 +7,8 @@ import socket
 import threading
 import time
 from PyAPI.class_http_parser import HttpParser
+from PyAPI.class_blacklist import Blacklist
+import random
 
 class RestServer():
 
@@ -14,12 +16,17 @@ class RestServer():
     #   note: by default, if no lan device's ip is passed, the socket wont be able to accept connections from the outter world
     #   note: by default the endpoint port is 8820, it is adviced to leave it as it is
     def __init__(self, local_ip:str = '127.0.0.1', local_port:int = 8820, endpoints=list, env:str=''):
-        self.local_ip = local_ip
-        self.local_port = local_port
-        self.attached_endpoints = endpoints
-        self.connected_clients = []
-        self.env = env
-        self.is_env_local = self.env == 'local'
+
+        self.local_ip                   = local_ip
+        self.local_port                 = local_port
+        self.backlog                    = 0
+        self.attached_endpoints         = endpoints
+        self.connected_clients          = []
+        self.env                        = env
+        self.is_env_local               = self.env == 'local'
+
+        # initialize blacklist handler
+        self.blacklist                  = Blacklist()
 
     
 
@@ -56,11 +63,28 @@ class RestServer():
 
 
     #
+    #   Returns the number of allowed quoted connections
+    #
+    def get_backlog(self, maxmimum:int):
+        return self.backlog
+
+
+
+    #
+    #   Sets the number of allowed quoted connections
+    #
+    def set_backlog(self, maxmimum:int):
+        self.backlog = maxmimum
+
+
+
+    #
     #   Setup and bind the server socket
     #   note: currently the server doesn't support IPv6
     #
     def setup(self):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((self.local_ip, self.local_port))
 
 
@@ -70,19 +94,24 @@ class RestServer():
     #
     def start(self):
         self.setup()
-        self.server.listen()
+        self.server.listen(self.backlog)
         while(True):
 
             # accept connections and move to unique thread to prevent long running operations to block any future or backloged connections
             client, address = self.server.accept()
+
+            # deny connections if ip is in the blacklist
+            if self.blacklist.find(address[0]):
+                client.close()
+                continue
             
             if(self.is_env_local):
                 if(address[0] not in self.connected_clients):
                     self.connected_clients.append(address[0])
-                    client_thread = threading.Thread(target=self.client_thread, args=(client, address, client.recv(1024)))
+                    client_thread = threading.Thread(target=self.client_thread, args=(client, address, client.recv(204800)))
                     client_thread.start()
             else:
-                client_thread = threading.Thread(target=self.client_thread, args=(client, address, client.recv(1024)))
+                client_thread = threading.Thread(target=self.client_thread, args=(client, address, client.recv(204800)))
                 client_thread.start()
 
 
@@ -133,8 +162,6 @@ class RestServer():
             data_to_send = self.attached_endpoints.endpoint_not_found()
             client.send(bytearray(data_to_send, 'utf-8'))
 
-        print('sent response to client')
-
         # always close the client connection after each request
         client.close()
 
@@ -143,3 +170,19 @@ class RestServer():
             time.sleep(1)
             self.unlock_ip(address[0])
         return False
+
+
+
+    #
+    #   add ip to blacklist and deny service from that ip
+    #
+    def deny(self, ip:str=''):
+        return self.blacklist.deny(ip)
+            
+
+    #
+    #   loads blacklist file and auto blacklist the ip's in the file
+    #
+    def load_blacklist(self, filepath:str=''):
+        return self.blacklist.load_config(filepath)
+            

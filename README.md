@@ -4,9 +4,13 @@
 <p align="center">Restfull API framework built by and for python</p>
 
 <p align="center">
-  <a href="https://github.com/create-go-app/cli/releases" target="_blank">
-    <img src="https://img.shields.io/badge/version-v1.0.0-blue?style=for-the-badge&logo=none" alt="cli version" />
-  </a>
+  <img src="https://img.shields.io/badge/version-v1.0.0-blue?style=for-the-badge&logo=none" alt="cli version" />
+</p>
+
+<p align="center">Tested Supported OS</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="" />
+  <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="" />
 </p>
 
 ## 📄 Intro
@@ -74,8 +78,10 @@ Or start the server with the example "entry.py" file via the terminal:
 ```
 
 
-Open the browser and navigate to the clients endpoint to see the example
-![image](https://user-images.githubusercontent.com/58599501/128392485-1fb1df8d-6587-4dda-8dde-cc84ce981813.png)
+Open the browser and type the following in the address bar to see the example endpoints in action:
+```python
+> 127.0.0.1:8820
+```
 <br/>
 <br/>
 

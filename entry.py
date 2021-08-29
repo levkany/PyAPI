@@ -4,7 +4,7 @@ from PyAPI.class_http_responder import HttpResponder
 
 
 # import endpoint callbacks
-from endpoints.clients import clients, clients_add
+from endpoints.clients import clients, clients_add, clients_home
 
 
 # override 404 not found callback
@@ -24,8 +24,11 @@ def default_endpoint(data):
 
 # add some endpoints
 endpoints.add('/', default_endpoint)
-endpoints.add('/clients', clients.callback)
+endpoints.add('/clients', clients_home.callback)
 endpoints.add('/clients/add', clients_add.callback)
+
+# dynamic path values can be accessed via the callback's property: "data.subpaths" or from "data.path"
+endpoints.add('/clients/new/[:id]/[:log_id]', clients.callback)
 
 
 # initiaze the server

@@ -149,13 +149,51 @@ class RestServer():
         is_callback_found = False
         for endpoint in self.attached_endpoints.get_all_endpoints():
             endpoint_path = endpoint[0]
-            if(endpoint_path == path):
-                is_callback_found = True
-                method_callback = endpoint[1]
-                data_to_send = bytearray(method_callback({'client': address[0], 'method': method, 'path': path, 'body': body}), 'utf-8')
+            
+            # dyanmic endpoint handle
+            if(':' in endpoint_path):
+                raw_subpoints = endpoint_path[endpoint_path.index('/', 1) + 1:]
+                endpoint_path = endpoint_path[0:endpoint_path.index('[', 1) -1]
+                subpoints = raw_subpoints.split('/')
+
+                # check if the extracted dynamic path exists in the requested path
+                # first find the path without the dynamic subpaths so that we can compare it
+                new_path = ''
                 try:
-                    client.send(data_to_send)
-                except: is_callback_found = False
+                    new_path = '/'.join(path.split('/')[0:subpoints.__len__()])
+                except: pass
+
+                if('' != new_path):
+                    if(endpoint_path == new_path):
+
+                        # attach each dynamic path the id defined by the user
+                        subpaths = path.split('/')[endpoint_path.split('/').__len__():]
+                        subpath_ids = raw_subpoints[raw_subpoints.index('['):].split('/')
+
+                        # make sure the dynamic paths count matching the registered count
+                        if(subpaths.__len__() == subpath_ids.__len__()):
+                            subpoints = {}
+                            for index, id in enumerate(subpath_ids):
+                                subid = id[id.index(':') +1 :id.index(']')]
+                                subpoints[subid] = subpaths[index]
+
+
+                            is_callback_found = True
+                            method_callback = endpoint[1]
+                            data_to_send = bytearray(method_callback({'client': address[0], 'method': method, 'path': path, 'body': body, 'subpaths': subpoints}), 'utf-8')
+                            try:
+                                client.send(data_to_send)
+                            except: is_callback_found = False
+            
+            # static endpoint handle
+            else:
+                if(endpoint_path == path):
+                    is_callback_found = True
+                    method_callback = endpoint[1]
+                    data_to_send = bytearray(method_callback({'client': address[0], 'method': method, 'path': path, 'body': body}), 'utf-8')
+                    try:
+                        client.send(data_to_send)
+                    except: is_callback_found = False
 
         if(False == is_callback_found):
             # data can be empty / False - if no 404 callback is registered

@@ -1,3 +1,15 @@
+PyAPi - v1.0.4
+    - added the ability to register an endpoint which can have dynamic subpaths
+    - added the ability to start the restful server from CLI	                    * IN-PROGRESS
+    - added ip blacklist import capability
+    - added ip blacklist capability
+    - added file upload wrapper		                                                
+    - added content-type multipart support                                          
+    - fixed a fake reponse that is sent which causing client to load forever
+    - fixed error port in use after terminating the server			
+    - added listener connections quote (set & get)
+    
+
 PyAPi - v1.0.1
     - updated endpoint examples & their documentation
     - simplified the way endpoint callbacks are registered

@@ -1,17 +1,21 @@
+from io import FileIO
 from PyAPI.class_http_responder import HttpResponder
 
 #
 # recieved params:
-# client:str - this is the client ip which initiated the request
-# method:str - this is request method, aka: GET/POST..
-# path:str   - this is the request resource path
-# body:str   - this is the request query string or Body data (depending on the request method) 
+# client:str    - this is the client ip which initiated the request
+# data:dict     - contains all the informations parsed by the server including params, files, uri, etc
 #
 def callback(data):
         #
-        # Example data:
-        # {'client': '127.0.0.1', 'method': 'GET', 'path': '/clients/add', 'body': 'hi=hello%20world'}
+        # Updated Example data:
+        # {'client': '127.0.0.1', 'data': {'body': [], 'files': [], 'method': 'GET', 'uri': '/clients', 'version': 'HTTP/1.1', 'query_string': [{'name': 'redirect', 'value': '123123'}]}}
         #
+
+        if(data['data']['files'].__len__()):
+                for file in data['data']['files']:
+                        with open('./uploads/' + file['filename'], 'xb') as handler:
+                                handler.write(file['binary'])
 
         # The responder accepts the following aguments:
         #  status_code:int = 200                - the status code to responde with

@@ -180,7 +180,7 @@ class RestServer():
 
                             is_callback_found = True
                             method_callback = endpoint[1]
-                            data_to_send = bytearray(method_callback({'client': address[0], 'method': method, 'path': path, 'body': body, 'subpaths': subpoints}), 'utf-8')
+                            data_to_send = bytearray(method_callback({'client': address[0], 'data': parsed, 'subpaths': subpoints}), 'utf-8')
                             try:
                                 client.send(data_to_send)
                             except: is_callback_found = False
@@ -190,7 +190,7 @@ class RestServer():
                 if(endpoint_path == path):
                     is_callback_found = True
                     method_callback = endpoint[1]
-                    data_to_send = bytearray(method_callback({'client': address[0], 'method': method, 'path': path, 'body': body}), 'utf-8')
+                    data_to_send = bytearray(method_callback({'client': address[0], 'data': parsed}), 'utf-8')
                     try:
                         client.send(data_to_send)
                     except: is_callback_found = False

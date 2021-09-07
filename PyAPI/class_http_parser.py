@@ -20,7 +20,7 @@ class HttpParser():
     def parse(raw_data):
         lines = bytearray(raw_data).split(b'\r\n')
         parsed_data = {}
-        parsed_data['body'] = []
+        parsed_data['body'] = {}
         parsed_data['files'] = []
         index = 0
         headers_found = False
@@ -81,8 +81,7 @@ class HttpParser():
                     items = decoded_bodyItem.split('&')
                     for item in items:
                         key_value = item.split('=')
-                        combined = {str(key_value[0]).replace('"', ''): key_value[1]}
-                        parsed_data['body'].append(combined)
+                        parsed_data['body'][str(key_value[0]).replace('"', '')] = key_value[1]
 
             # handle multipart body
             else:
@@ -103,8 +102,7 @@ class HttpParser():
                         # prepare the multipart body for user callback
                         if(False == is_file):
                             fieldvalue = bytearray(body[(index + 2)]).decode(errors="ignore") # fetch converted content
-                            combined = {str(fieldname).replace('"', ''): fieldvalue}
-                            parsed_data['body'].append(combined)
+                            parsed_data['body'][str(fieldname).replace('"', '')] = fieldvalue
                         else:
                             try:
                                 fieldvalue = body[(index + 2)] # fetch raw bytes

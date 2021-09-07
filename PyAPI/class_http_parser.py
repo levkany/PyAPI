@@ -81,10 +81,8 @@ class HttpParser():
                     items = decoded_bodyItem.split('&')
                     for item in items:
                         key_value = item.split('=')
-                        parsed_data['body'].append({
-                            'name': key_value[0],
-                            'value': key_value[1],
-                        })
+                        combined = {str(key_value[0]).replace('"', ''): key_value[1]}
+                        parsed_data['body'].append(combined)
 
             # handle multipart body
             else:
@@ -105,18 +103,21 @@ class HttpParser():
                         # prepare the multipart body for user callback
                         if(False == is_file):
                             fieldvalue = bytearray(body[(index + 2)]).decode(errors="ignore") # fetch converted content
-                            parsed_data['body'].append({
-                                'name': fieldname,
-                                'value': fieldvalue,
-                            })
+                            combined = {str(fieldname).replace('"', ''): fieldvalue}
+                            parsed_data['body'].append(combined)
                         else:
                             try:
                                 fieldvalue = body[(index + 2)] # fetch raw bytes
                                 parsed_data['files'].append({
-                                    'fieldname': fieldname,
+                                    'fieldname': str(fieldname).replace('"', ''),
                                     'filename': filename,
                                     'binary': fieldvalue,
                                 })
+                                combined = {fieldname: {
+                                    'filename': filename,
+                                    'binary': fieldvalue
+                                }}
+                                parsed_data['files'].append(combined)
                             except: pass
                 except: pass
         return parsed_data
